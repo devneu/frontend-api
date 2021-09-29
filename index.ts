@@ -8,7 +8,6 @@ const PORT: number = 3000;
 app.get('/', cors(), (req: Request, res: Response) => {
     res.send('<h1>Hello world</h1>');
     res.end();
-
 });
 
 app.listen(PORT, () => console.log(`listening port ${PORT}`));
