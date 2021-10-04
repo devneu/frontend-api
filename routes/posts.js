@@ -20,6 +20,6 @@ router.get('/:id', getPost);
 
 router.delete('/:id', deletePost);
 
-router.put('/:id', postValidation,updatePost);
+router.put('/:id', postValidation, updatePost);
 
 module.exports = router;
