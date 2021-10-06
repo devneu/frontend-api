@@ -13,19 +13,19 @@ async function getPost(req, res) {
 async function deletePost(req, res) {
   const { id } = req.params;
   try {
-    let deletedPost = await Post.findByIdAndDelete(id);
+    const deletedPost = await Post.findByIdAndDelete(id);
     res.json(deletedPost);
   } catch (error) {
     res.status(404).json({message:'Not found Id'})
   }
 }
 
-async function updatePost(req, res) {
+async function updatedPost(req, res) {
   const { title, author, text } = req.body;
   const { id } = req.params;
   try {
-    let updatePost = await Post.findByIdAndUpdate(id, { title, author, text }, { new: true });
-    res.json(updatePost);
+    const updatedPost = await Post.findByIdAndUpdate(id, { title, author, text }, { new: true });
+    res.json(updatedPost);
   } catch (error) {
     res.status(404).json({message:'Not found Id'})
   }
@@ -54,7 +54,7 @@ async function addPost(req, res) {
 module.exports = {
   getPost,
   deletePost,
-  updatePost,
+  updatedPost,
   getPosts,
   addPost,
 };
