@@ -1,64 +1,60 @@
 const Post = require('../models/post');
-const deleteSchema = require('../validation/deleteShema');
 
+async function getPost(req, res) {
+  const { id } = req.params;
+  try {
+    const post = await Post.findById(id);
+    res.json(post);
+  } catch (error) {
+    res.status(404).json({message:'Not found Id'})
+  }
+}
 
-const handleError =  (res, error) => {
+async function deletePost(req, res) {
+  const { id } = req.params;
+  try {
+    let deletedPost = await Post.findByIdAndDelete(id);
+    res.json(deletedPost);
+  } catch (error) {
+    res.status(404).json({message:'Not found Id'})
+  }
+}
+
+async function updatePost(req, res) {
+  const { title, author, text } = req.body;
+  const { id } = req.params;
+  try {
+    let updatePost = await Post.findByIdAndUpdate(id, { title, author, text }, { new: true });
+    res.json(updatePost);
+  } catch (error) {
+    res.status(404).json({message:'Not found Id'})
+  }
+}
+
+async function getPosts(req, res) {
+  try {
+    const posts = await Post.find().sort({ createdAt: -1 });
+    res.json(posts);
+  } catch (error) {
     res.status(500).send(error.message);
-};
-
-const getPost = async (req, res) => {
-    await Post
-        .findById(req.params.id)
-        .then((post)=> res.status(200).json(post))
-        .catch((error) => handleError(res, error));
+  }
 }
 
-const deletePost = async (req, res) => {
-    const result = await deleteSchema.validateAsync(req.body);
-    if (result.user === process.env.User &&  result.password === process.env.PASSWORD) {
-        await Post
-          .findByIdAndDelete(req.params.id)
-          .then(() => res.status(200).json(req.params.id))
-          .catch((error) => handleError(res, error));
-    }else{
-        res.status(500).json({
-            error:'invalid user or password ',
-            })
-    }
-}
-
-const editPost = async(req, res) => {
-    const { title, author, text } = req.body;
-    const { id } = req.params;
-    await Post
-        .findByIdAndUpdate(id, { title, author, text },{ new:true })
-        .then((post)=> res.status(200).json(post))
-        .catch((error) => handleError(res, error));
-}
-
-const getPosts = async (req, res) => {
-    await Post
-        .find()
-        .sort({ createdAt: -1 })
-        .then((posts)=> res.status(200).json(posts))
-        .catch((error) => handleError(res, error));
-}
-
-
-const addPost = async (req, res) => {
-    const { title, author, text } = req.body;
-    const post = new Post({ title, author, text });
-    await post
-        .save()
-      // eslint-disable-next-line no-shadow
-        .then((post)=> res.status(200).json(post))
-        .catch((error) => handleError(res, error));
+async function addPost(req, res) {
+  const { title, author, text } = req.body;
+  const post = new Post({ title, author, text });
+  try {
+    const createdPost = await post.save();
+    res.json(createdPost);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 }
 
 module.exports = {
-    getPost,
-    deletePost,
-    editPost,
-    getPosts,
-    addPost,
+  getPost,
+  deletePost,
+  updatePost,
+  getPosts,
+  addPost,
 };

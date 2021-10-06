@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const postRoutes = require('./routes/api-posts');
+const postRoutes = require('./routes/posts');
 require('dotenv').config();
 
 const app = express();
@@ -21,7 +21,7 @@ start();
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
-app.use('/blog', postRoutes);
+app.use('/posts', postRoutes);
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello world</h1>');

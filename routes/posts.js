@@ -3,7 +3,7 @@ const express = require('express');
 const {
   getPost,
   deletePost,
-  editPost,
+  updatePost,
   getPosts,
   addPost
 } = require('../controller/posts');
@@ -19,6 +19,6 @@ router.get('/:id', getPost);
 
 router.delete('/:id', deletePost);
 
-router.put('/:id', editPost);
+router.put('/:id', updatePost);
 
 module.exports = router;
