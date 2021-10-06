@@ -14,7 +14,8 @@
     "express": "^4.17.1",
     "joi": "^17.4.2",
     "mongoose": "^6.0.8",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "eslint-config-airbnb": "18.2.1",
@@ -25,6 +26,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "7.21.5",
-    "eslint-plugin-react-hooks": "1.7.0"
+    "eslint-plugin-react-hooks": "1.7.0",
+    "express-winston": "^4.2.0"
   }
 }

@@ -20,7 +20,7 @@ async function deletePost(req, res) {
   }
 }
 
-async function updatedPost(req, res) {
+async function updatePost(req, res) {
   const { title, author, text } = req.body;
   const { id } = req.params;
   try {
@@ -54,7 +54,7 @@ async function addPost(req, res) {
 module.exports = {
   getPost,
   deletePost,
-  updatedPost,
+  updatePost,
   getPosts,
   addPost,
 };
