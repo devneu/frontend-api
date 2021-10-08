@@ -31,7 +31,7 @@ app.use(expressWinston.logger({
     msg: "HTTP  ",
     expressFormat: true,
     colorize: false,
-    ignoreRoute: function (req, res) { return false; }
+    ignoreRoute: ( req, res) => { return false; }
 }));
 
 app.use(cors());
