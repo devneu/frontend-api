@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const postRoutes = require('./routes/posts');
-const winston = require('winston');
-const expressWinston = require('express-winston');
+const logger = require("./logger/winston");
+const morgan = require("morgan");
+
 require('dotenv').config();
 
 const app = express();
@@ -19,22 +20,12 @@ const start  = async () =>{
 };
 start();
 
-app.use(expressWinston.logger({
-    transports: [
-        new winston.transports.Console()
-    ],
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.json()
-    ),
-    meta: false,
-    msg: "HTTP  ",
-    expressFormat: true,
-    colorize: false,
-    ignoreRoute: ( req, res) => { return false; }
-}));
+app.use(logger());
+
+morgan(':method :url :status :res[content-length] - :response-time ms');
 
 app.use(cors());
+
 app.use(express.urlencoded({extended: false}));
 
 app.use('/posts', postRoutes);
@@ -42,4 +33,12 @@ app.use('/posts', postRoutes);
 app.get('/', (req, res) => {
     res.send('<h1>Hello world</h1>');
     res.end();
+});
+
+app.use(async (err, req, res, next) => {
+    console.log(err);
+    res.json({
+        error:err,
+        message:err.message,
+    });
 });
