@@ -8,7 +8,7 @@ const morgan = require("morgan");
 require('dotenv').config();
 
 const app = express();
-const Port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 const start  = async () =>{
     mongoose
@@ -16,13 +16,13 @@ const start  = async () =>{
       .then(() => console.log(('Connected to db ')))
       .catch((error) => console.log((error)));
 
-    app.listen(Port, () => console.log(`listening port ${Port}`));
+    app.listen(port, () => console.log(`listening port ${port}`));
 };
 start();
 
 app.use(logger());
 
-morgan(':method :url :status :res[content-length] - :response-time ms');
+app.use(morgan());
 
 app.use(cors());
 

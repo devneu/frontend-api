@@ -7,7 +7,7 @@ const {
   getPosts,
   addPost
 } = require('../controller/posts');
-const { postValidationError } = require('../validation/post.validation');
+const { postValidationError } = require('../controller/posts');
 
 
 const router = express.Router();

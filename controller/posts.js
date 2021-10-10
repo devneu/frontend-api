@@ -1,6 +1,8 @@
 const Post = require('../models/post');
 const NotFound = require("../customEror/NotFoundError");
 const ServerError = require("../customEror/ServerError");
+const post = require("../validation/postValidationShema");
+const ValidationError = require("../customEror/ValidationError");
 
 async function getPost(req, res, next) {
   const { id } = req.params;
@@ -54,7 +56,17 @@ async function addPost(req, res, next) {
   }
 }
 
+async function postValidationError (req, res, next) {
+    const value = await post.validate(req.body);
+    if (value.error ) {
+      next( new ValidationError("Validation error " + value.error.details[0].message));
+    }else{
+      next()
+    }
+}
+
 module.exports = {
+  postValidationError,
   getPost,
   deletePost,
   updatePost,
