@@ -56,7 +56,7 @@ async function addPost(req, res, next) {
   }
 }
 
-async function postValidationError (req, res, next) {
+async function postValidation (req, res, next) {
     const value = await post.validate(req.body);
     if (value.error ) {
       next( new ValidationError("Validation error " + value.error.details[0].message));
@@ -66,7 +66,7 @@ async function postValidationError (req, res, next) {
 }
 
 module.exports = {
-  postValidationError,
+  postValidation,
   getPost,
   deletePost,
   updatePost,
