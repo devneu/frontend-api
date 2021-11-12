@@ -20,5 +20,8 @@
   "devDependencies": {
     "express-winston": "^4.2.0",
     "morgan": "^1.10.0"
+  },
+  "engines": {
+    "node": "16.10.0"
   }
 }
