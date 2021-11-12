@@ -15,11 +15,12 @@
     "joi": "^17.4.2",
     "mongoose": "^6.0.8",
     "nodemon": "^2.0.13",
-    "winston": "^3.3.3"
-  },
-  "devDependencies": {
+    "winston": "^3.3.3",
     "express-winston": "^4.2.0",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+
   },
   "engines": {
     "node": "16.10.0"
