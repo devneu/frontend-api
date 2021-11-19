@@ -20,6 +20,8 @@ const start  = async () =>{
 };
 start();
 
+app.use(express.json());
+
 app.use(logger());
 
 app.use(morgan());
